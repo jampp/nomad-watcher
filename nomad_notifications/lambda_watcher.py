@@ -22,16 +22,19 @@ NOMAD_WATCH_STATUS = os.environ.get('NOMAD_WATCH_STATUS', 'pending')
 CONSUL_ADDR        = os.environ.get('CONSUL_ADDR', 'http://localhost:8500')
 CONSUL_KV_PREFIX   = os.environ.get('CONSUL_KV_PREFIX', 'nomad_watcher')
 
+SLACK_WEBHOOK = None
 if RUN_LOCAL:
-    SLACK_WEBHOOK = os.environ.get('SLACK_WEBHOOK')
+    SLACK_WEBHOOK = os.environ.get('SLACK_WEBHOOK', None)
 else:
     from base64 import b64decode
-    SLACK_WEBHOOK_ENC = os.environ.get('SLACK_WEBHOOK')
-    SLACK_WEBHOOK     = boto3.client('kms').decrypt(
-            CiphertextBlob = b64decode(SLACK_WEBHOOK_ENC)
-        )['Plaintext']
+    SLACK_WEBHOOK_ENC = os.environ.get('SLACK_WEBHOOK', None)
 
-SLACK_CHANNEL = os.environ.get('SLACK_CHANNEL')
+    if SLACK_WEBHOOK_ENC is not None:
+        SLACK_WEBHOOK     = boto3.client('kms').decrypt(
+                CiphertextBlob = b64decode(SLACK_WEBHOOK_ENC)
+            )['Plaintext']
+
+SLACK_CHANNEL = os.environ.get('SLACK_CHANNEL', None)
 
 # Loggers config
 logger = logging.getLogger()
@@ -50,5 +53,6 @@ def main(event, context):
         consul_kv_prefix = CONSUL_KV_PREFIX
     )
 
-    notifier.slack(SLACK_WEBHOOK, SLACK_CHANNEL, jobs)
+    if SLACK_WEBHOOK is not None:
+        notifier.slack(SLACK_WEBHOOK, SLACK_CHANNEL, jobs)
 
