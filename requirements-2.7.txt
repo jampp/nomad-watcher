@@ -1,0 +1,3 @@
+python-nomad
+python-consul
+requests
