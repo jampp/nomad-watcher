@@ -82,7 +82,7 @@ if __name__ == '__main__':
         ]
       }
       requests.post(WEBHOOK_URL, data = json.dumps(payload))
-      print r['Name'], r['ID'][:8], r['ClientStatus'], time.ctime(r['CreateTime']/1000000000)
+      print(r['Name'], r['ID'][:8], r['ClientStatus'], time.ctime(r['CreateTime']/1000000000))
 
   else:
     pass
