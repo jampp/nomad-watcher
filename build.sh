@@ -15,7 +15,7 @@ docker run \
   -w /opt \
   python:${PYTHON_VERSION}-alpine \
   /bin/sh -c \
-    "pip install -r requirements-${PYTHON_VERSION}.txt -t ${BUILD_PREFIX}"
+    "pip install -r requirements.txt -t ${BUILD_PREFIX}"
 
 # Add relevant code to build directory
 cp -r \
