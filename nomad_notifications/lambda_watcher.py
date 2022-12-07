@@ -8,8 +8,8 @@ import json
 import boto3
 import distutils.util
 
-import nomad_watcher
-import notifier
+from . import nomad_watcher
+from . import notifier
 
 ###############################################################################
 
