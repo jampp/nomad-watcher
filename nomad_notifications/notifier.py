@@ -1,5 +1,3 @@
-# vim:ts=4:sw=4:et:ft=python
-
 ###############################################################################
 
 import os
@@ -53,4 +51,3 @@ def slack(slack_webhook, slack_channel, jobs):
                     r.text
                 )
             )
-
