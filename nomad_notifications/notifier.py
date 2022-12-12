@@ -19,7 +19,7 @@ logger_urllib.setLevel(logging.ERROR)
 
 def slack(slack_webhook, slack_channel, jobs):
 
-    for k,v in jobs.iteritems():
+    for k,v in jobs.items():
 
         slack_payload = {
             "fallback": "Nomad Job: {}".format(v['Name']),
