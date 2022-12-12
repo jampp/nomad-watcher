@@ -1,3 +1,5 @@
+#!/bin/bash
+
 PYTHON_VERSION=${PYTHON_VERSION:-3.8}
 PROJECT_NAME=nomad-watcher
 BUILD_PREFIX=./build
