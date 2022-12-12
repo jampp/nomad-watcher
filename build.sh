@@ -5,7 +5,6 @@ PROJECT_NAME=nomad-watcher
 BUILD_PREFIX=./build
 
 AWS_REGION=${AWS_REGION:-us-east-1}
-AWS_PROFILE=${AWS_PROFILE:-default}
 
 [ ! -d ${BUILD_PREFIX} ] && mkdir ${BUILD_PREFIX}
 
@@ -32,7 +31,6 @@ find ./ -type d -name "__pycache__" -exec rm -rf \{} \;
 pushd ${BUILD_PREFIX} && zip -r ../${PROJECT_NAME}.zip ./ -x "*.pyc" "*.swa" "*.swp" && popd
 
 aws lambda update-function-code \
-  --profile ${AWS_PROFILE} \
   --function-name ${PROJECT_NAME} \
   --zip-file fileb://${PROJECT_NAME}.zip \
   --region ${AWS_REGION}
