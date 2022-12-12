@@ -36,4 +36,3 @@ aws lambda update-function-code \
   --function-name ${PROJECT_NAME} \
   --zip-file fileb://${PROJECT_NAME}.zip \
   --region ${AWS_REGION}
-
