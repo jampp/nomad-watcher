@@ -1,5 +1,6 @@
+#!/bin/bash
 
-PYTHON_VERSION=${PYTHON_VERSION:-2.7}
+PYTHON_VERSION=${PYTHON_VERSION:-3.8}
 PROJECT_NAME=nomad-watcher
 BUILD_PREFIX=./build
 
@@ -15,11 +16,11 @@ docker run \
   -w /opt \
   python:${PYTHON_VERSION}-alpine \
   /bin/sh -c \
-    "pip install -r requirements-${PYTHON_VERSION}.txt -t ${BUILD_PREFIX}"
+    "pip install -r requirements.txt -t ${BUILD_PREFIX}"
 
 # Add relevant code to build directory
 cp -r \
-  ./aws_lambda.py \
+  ./lambda_function.py \
   ./nomad_notifications \
   ${BUILD_PREFIX}
 
@@ -35,4 +36,3 @@ aws lambda update-function-code \
   --function-name ${PROJECT_NAME} \
   --zip-file fileb://${PROJECT_NAME}.zip \
   --region ${AWS_REGION}
-

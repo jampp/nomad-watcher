@@ -1,4 +1,4 @@
-# vim:ts=4:sw=4:et:ft=python
+###############################################################################
 
 import os
 import logging
@@ -8,8 +8,8 @@ import json
 import boto3
 import distutils.util
 
-import nomad_watcher
-import notifier
+from . import nomad_watcher
+from . import notifier
 
 ###############################################################################
 
@@ -55,4 +55,3 @@ def main(event, context):
 
     if SLACK_WEBHOOK is not None:
         notifier.slack(SLACK_WEBHOOK, SLACK_CHANNEL, jobs)
-
