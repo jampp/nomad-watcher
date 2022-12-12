@@ -20,7 +20,7 @@ docker run \
 
 # Add relevant code to build directory
 cp -r \
-  ./aws_lambda.py \
+  ./lambda_function.py \
   ./nomad_notifications \
   ${BUILD_PREFIX}
 
